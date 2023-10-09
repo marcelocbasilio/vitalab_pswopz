@@ -14,6 +14,10 @@ pip install django
 
 pip install pillow
 
+### Instalar biblioteca para gerar PDF de HTML
+
+pip install weasyprint
+
 ### Criar projeto
 django-admin startproject <nome_do_projeto> .
 

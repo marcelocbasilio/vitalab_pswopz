@@ -1,17 +1,21 @@
-from random import choice, shuffle
 import string
+from random import choice, shuffle
+import os
+from django.conf import settings
+from django.template.loader import render_to_string
+from weasyprint import HTML
+from io import BytesIO
 
 def gerar_senha_aleatoria(tamanho):
 
     caracteres_especiais = string.punctuation   
     caracteres = string.ascii_letters
     numeros_list = string.digits
-
     
     sobra = 0
     qtd = tamanho // 3
     if not tamanho % 3 == 0:
-        sobra = tamanho - qtd
+        sobra = tamanho - (qtd * 3)
 
     letras = ''
     for i in range(0, qtd + sobra):
@@ -24,17 +28,11 @@ def gerar_senha_aleatoria(tamanho):
     especiais = ''
     for i in range(0, qtd):
         especiais += choice(caracteres_especiais)
-
     
     senha = list(letras + numeros + especiais)
     shuffle(senha)
 
     return ''.join(senha)
-
-from django.conf import settings
-from django.template.loader import render_to_string
-from io import BytesIO
-from weasyprint import HTML
 
 def gerar_pdf_exames(exame, paciente, senha):
 
@@ -43,7 +41,7 @@ def gerar_pdf_exames(exame, paciente, senha):
 
     path_output = BytesIO()
 
-    HTML(string=template_render).write_pdf(path_output)
+    HTML(string = template_render).write_pdf(path_output)
     path_output.seek(0)
     
     return path_output

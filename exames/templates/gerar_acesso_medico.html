@@ -19,7 +19,7 @@
         {% endif %}
         <div class="row">
             <div class="col-md-5">
-                <h3>Gerar acesso médico</h3>
+                <h3>Gerar Acesso Médico</h3>
 
                 <form action="{% url "gerar_acesso_medico" %}" method="POST">{% csrf_token %}
 
@@ -56,7 +56,7 @@
                         <tr>
                           <th>Id</th>
                           <th>Status</th>
-                          <th>Link</th>
+                          <th>Token (link)</th>
                           
                         </tr>
         
@@ -65,7 +65,7 @@
                             <tr class="linha-tabela">
                                 <td>{{acesso.identificacao}}</td>
                                 <td>{{acesso.status}}</td>
-                                <td><a href="{{acesso.url}}">{{acesso.url}}</a></td>
+                                <td><a href="{{acesso.url}}">{{acesso.token}}</a></td>
                             </tr>
                         {% endfor %}
                       
